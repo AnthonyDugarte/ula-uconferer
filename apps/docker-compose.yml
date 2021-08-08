@@ -7,7 +7,7 @@ services:
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
-  graphql-engine:
+  api:
     image: hasura/graphql-engine:v2.0.5.cli-migrations-v3
     ports:
       - "8080:8080"
@@ -29,5 +29,18 @@ services:
     volumes:
       - ./api/metadata:/hasura-metadata
       - ./api/migrations:/hasura-migrations
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "api"
+    restart: always
+    environment:
+      API_URL: http://api:8080
+    volumes:
+      - ./web/pages:/app/pages
 volumes:
   db_data:
