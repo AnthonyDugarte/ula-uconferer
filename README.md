@@ -22,7 +22,7 @@ cd apps
 docker-compose up
 ```
 
-Access to the web app in [http://localhost:3000].
+Access to the web app in <http://localhost:3000>.
 
 ### Hasura Console
 
@@ -36,4 +36,4 @@ Access to the web app in [http://localhost:3000].
   # INFO console running at: http://localhost:9695/
   ```
 
-- Access to the given url: e.g. [http://localhost:9695]
+- Access to the given url: e.g. <http://localhost:9695>
