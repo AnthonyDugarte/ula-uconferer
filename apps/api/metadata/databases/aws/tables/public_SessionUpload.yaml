@@ -1,3 +1,10 @@
 table:
   name: SessionUpload
   schema: public
+object_relationships:
+- name: Session
+  using:
+    foreign_key_constraint_on: Upload_For_Session_FK
+- name: UploadType
+  using:
+    foreign_key_constraint_on: Upload_IsOf_UploadType_FK
