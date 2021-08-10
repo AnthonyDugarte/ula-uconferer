@@ -1,0 +1,3 @@
+table:
+  name: Role
+  schema: public

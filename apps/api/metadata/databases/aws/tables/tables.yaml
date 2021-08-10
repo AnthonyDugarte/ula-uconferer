@@ -1,1 +1,6 @@
-[]
+- "!include public_Role.yaml"
+- "!include public_Session.yaml"
+- "!include public_SessionUpload.yaml"
+- "!include public_UploadType.yaml"
+- "!include public_User.yaml"
+- "!include public_UserUpload.yaml"
