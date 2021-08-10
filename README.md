@@ -15,6 +15,13 @@ In order to enable the hasura console, it is necessary to be installed:
 
 > Make sure to install version 2.x.x
 
+### Auth0
+
+Follow the setup steps from [nextjs-auth0](https://github.com/auth0/nextjs-auth0#auth0-configuration).
+
+- `cp .env.local.example .env.local`
+- Update values at `.env.local`.
+
 ## Initiate apps
 
 ```bash
