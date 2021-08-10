@@ -1,18 +1,3 @@
 table:
   name: UploadType
   schema: public
-array_relationships:
-- name: SessionUploads
-  using:
-    foreign_key_constraint_on:
-      column: Upload_IsOf_UploadType_FK
-      table:
-        name: SessionUpload
-        schema: public
-- name: UserUploads
-  using:
-    foreign_key_constraint_on:
-      column: Upload_IsOf_UploadType_FK
-      table:
-        name: UserUpload
-        schema: public

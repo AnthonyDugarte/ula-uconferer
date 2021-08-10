@@ -1,15 +1,3 @@
 table:
   name: Session
   schema: public
-object_relationships:
-- name: User
-  using:
-    foreign_key_constraint_on: Session_PresentedBy_User
-array_relationships:
-- name: SessionUploads
-  using:
-    foreign_key_constraint_on:
-      column: Upload_For_Session_FK
-      table:
-        name: SessionUpload
-        schema: public
