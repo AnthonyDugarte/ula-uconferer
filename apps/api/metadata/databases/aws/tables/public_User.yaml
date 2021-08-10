@@ -1,3 +1,22 @@
 table:
   name: User
   schema: public
+object_relationships:
+- name: Role
+  using:
+    foreign_key_constraint_on: User_Has_Role
+array_relationships:
+- name: Sessions
+  using:
+    foreign_key_constraint_on:
+      column: Session_PresentedBy_User
+      table:
+        name: Session
+        schema: public
+- name: UserUploads
+  using:
+    foreign_key_constraint_on:
+      column: Upload_For_User_FK
+      table:
+        name: UserUpload
+        schema: public
