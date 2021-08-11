@@ -1,8 +1,26 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import { useQuery, gql } from "@apollo/client";
+import Head from "next/head";
+import Image from "next/image";
+import { useUser } from "@auth0/nextjs-auth0";
+import styles from "../styles/Home.module.css";
+
+const TEST_QUERY = gql`
+  query MyQuery {
+    User {
+      email
+      firstname
+      lastname
+    }
+  }
+`;
 
 export default function Home() {
+  const { data } = useQuery(TEST_QUERY);
+  const { user } = useUser();
+
+  console.log("data", data);
+  console.log("user", user);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -12,12 +30,15 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <a href="/api/auth/login">Login</a>
+        <a href="/api/auth/logout">Logout</a>
+
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
@@ -58,12 +79,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }

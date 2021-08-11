@@ -27,7 +27,7 @@ services:
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
-      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_ADMIN_SECRET: a47d92b89d53d3f4b9887b8a7a4d163e8e0d3ff988ccc20b6c9d11ea8b415262
     volumes:
       - ./api/metadata:/hasura-metadata
       - ./api/migrations:/hasura-migrations
