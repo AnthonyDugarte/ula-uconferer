@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0";
 import styles from "../styles/Home.module.css";
+import { withApollo } from "../lib/withApollo";
 
 const TEST_QUERY = gql`
   query MyQuery {
@@ -14,7 +15,7 @@ const TEST_QUERY = gql`
   }
 `;
 
-export default function Home() {
+function Home() {
   const { data } = useQuery(TEST_QUERY);
   const { user } = useUser();
 
@@ -88,3 +89,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default withApollo()(Home);
