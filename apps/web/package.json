@@ -10,11 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.7",
-    "@apollo/react-hooks": "^4.0.0",
-    "@apollo/react-ssr": "^4.0.0",
     "@auth0/nextjs-auth0": "^1.5.0",
-    "apollo-boost": "^0.4.9",
-    "apollo-link-ws": "^1.0.20",
     "graphql": "^15.5.1",
     "isomorphic-unfetch": "^3.1.0",
     "next": "11.0.1",
@@ -24,6 +20,7 @@
   },
   "devDependencies": {
     "@types/react": "17.0.16",
+    "@types/react-dom": "^17.0.9",
     "eslint": "7.32.0",
     "eslint-config-next": "11.0.1",
     "typescript": "4.3.5"

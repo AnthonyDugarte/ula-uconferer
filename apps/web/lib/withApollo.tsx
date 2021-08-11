@@ -1,11 +1,9 @@
 import React from "react";
-import Head from "next/head";
 import { NextPage, NextPageContext } from "next";
 import { AppContext } from "next/app";
-import { NormalizedCacheObject } from "apollo-cache-inmemory";
-
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider, NormalizedCacheObject } from "@apollo/client";
 import createApolloClient from "./apolloClient";
+
 import auth0 from "./auth0";
 
 interface ApolloNextPageProps {
@@ -26,7 +24,6 @@ let globalApolloClient: ReturnType<typeof createApolloClient> | null = null;
  * Installs the Apollo Client on NextPageContext
  * or NextAppContext. Useful if you want to use apolloClient
  * inside getStaticProps, getStaticPaths or getServerSideProps
- * @param {NextPageContext | NextAppContext} ctx
  */
 export const initOnContext = (ctx: EnrichedNextPageContext) => {
   const inAppContext = Boolean(ctx.ctx);
@@ -82,8 +79,6 @@ async function getHeaders(ctx: EnrichedNextPageContext) {
 /**
  * Always creates a new apollo client on the server
  * Creates or reuses apollo client in the browser.
- * @param  {NormalizedCacheObject} initialState
- * @param  {NextPageContext} ctx
  */
 const initApolloClient = (
   initialState?: NormalizedCacheObject,
@@ -122,12 +117,11 @@ export const withApollo =
         client = apolloClient;
       } else {
         // Happens on: next.js csr
-        // client = initApolloClient(apolloState, undefined);
         client = initApolloClient(apolloState, {});
       }
 
       return (
-        <ApolloProvider client={client as any}>
+        <ApolloProvider client={client}>
           <PageComponent {...pageProps} />
         </ApolloProvider>
       );
@@ -139,6 +133,7 @@ export const withApollo =
         PageComponent.displayName || PageComponent.name || "Component";
       WithApollo.displayName = `withApollo(${displayName})`;
     }
+
     if (ssr || PageComponent.getInitialProps) {
       WithApollo.getInitialProps = async (ctx: EnrichedNextPageContext) => {
         const { AppTree } = ctx;
@@ -160,7 +155,7 @@ export const withApollo =
         if (typeof window === "undefined") {
           // When redirecting, the response is finished.
           // No point in continuing to render
-          if (ctx.res && ctx.res.finished) {
+          if (ctx.res && ctx.res.writableEnded) {
             return pageProps;
           }
 
@@ -168,7 +163,10 @@ export const withApollo =
           if (ssr) {
             try {
               // Run all GraphQL queries
-              const { getDataFromTree } = await import("@apollo/react-ssr");
+              const { getDataFromTree } = await import(
+                "@apollo/client/react/ssr"
+              );
+
               await getDataFromTree(
                 <AppTree
                   pageProps={{
