@@ -28,6 +28,7 @@ services:
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: a47d92b89d53d3f4b9887b8a7a4d163e8e0d3ff988ccc20b6c9d11ea8b415262
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS512", "key": "-----BEGIN CERTIFICATE-----\nMIIDDzCCAfegAwIBAgIJGwOLreuqo0KFMA0GCSqGSIb3DQEBCwUAMCUxIzAhBgNV\nBAMTGnVjb25mZXJlci1kZXYudXMuYXV0aDAuY29tMB4XDTIxMDgxMDExNTU0NVoX\nDTM1MDQxOTExNTU0NVowJTEjMCEGA1UEAxMadWNvbmZlcmVyLWRldi51cy5hdXRo\nMC5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC88adYte5fx7Rt\nYy6NajKBEKsdy4sWykX+5j+t07EqXtrLvnoIVm2BZslzAoMnjnw2Xgq+3O2/t3wX\nHuCNmRLwVirjseU+im34tNoyIrrTMpUT0y8r8YBmDgx8Fl4ulDOoAE7cfUye4vd8\nEPfFemyAageK/dR1SqX3dtfvrflyFWVpG2Rc+Frn8OQisWEPWEesLfkLAQNsVKw1\nqtJLz54H3P2YXwq9cm73AvCv0l57BPmpso24kq/eM7Uer9yfq5GGwU0e5473O5Zj\nQWftI64enuqu6gC0fse9ePj4NyCZALC60n7VZd1b+Ho1+P698Bv6dJVDjI66s7x9\nG/xx85pJAgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFJn76XXH\nLYwWp7zQf1W39OLgmW/QMA4GA1UdDwEB/wQEAwIChDANBgkqhkiG9w0BAQsFAAOC\nAQEAaEtQElVxaga9yFRmIxtOZqe5wNnm6N6BW/YaaR1sdFEYsWaaYgY39kyTrSRb\nXGHePdkMR4VlTJhTv644Nyy0ZFLS7oaaN2Lz0MR/+Azn5IrrOkNXsKzhWdTT4NNs\nVbVD/jdk0Eq5i1dViVMlmSY2dI0lWKSFrYDztDaVYGGiglESO8JVnMpTBDVq+as0\ne5lDNZp9LGbXO1l7acqoGOic/3/Qo1Jpnwzc3qv4wy5Vx1oLEE28X0L4tbQ55XRZ\nGPyhmKCddkkEiTkPek7PSTYTp0xhw8CuoEubjBxH3yzyJusNUH+3aFc+u7o8sXzR\nd0car63TA+vLBBBqb9X1WsTPuA==\n-----END CERTIFICATE-----"}'
     volumes:
       - ./api/metadata:/hasura-metadata
       - ./api/migrations:/hasura-migrations

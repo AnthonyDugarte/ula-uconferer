@@ -22,6 +22,17 @@ Follow the setup steps from [nextjs-auth0](https://github.com/auth0/nextjs-auth0
 - `cp .env.local.example .env.local`
 - Update values at `.env.local`.
 
+#### Rules
+
+Create the corresponding rules at [apps/auth0/rules](apps/auth0/rules).
+
+Their setup instructions are located at the top of each rule.
+
+Make sure to have them in the following order:
+
+- user-reconciliation: User reconciliation with our DB for new users that log into our app.
+- role-claim: Add user's role and hasura's auth info to headers.
+
 ## Initiate apps
 
 ```bash
