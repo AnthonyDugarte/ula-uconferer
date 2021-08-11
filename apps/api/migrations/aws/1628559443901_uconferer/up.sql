@@ -5,7 +5,7 @@ BEGIN;
 
 CREATE TABLE public."User"
 (
-    user_id integer NOT NULL,
+    user_id SERIAL,
     email character varying(50) NOT NULL,
     firstname character varying(50) NOT NULL,
     lastname character varying(50) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE public."User"
 
 CREATE TABLE public."Session"
 (
-    session_id integer NOT NULL,
+    session_id SERIAL,
     name character varying(50) NOT NULL,
     date date NOT NULL,
     "time" time with time zone NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE public."Session"
 
 CREATE TABLE public."SessionUpload"
 (
-    session_upload_id integer NOT NULL,
+    session_upload_id SERIAL,
     url character varying(200) NOT NULL,
     "Upload_For_Session_FK" integer NOT NULL,
     "Upload_IsOf_UploadType_FK" integer NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE public."SessionUpload"
 
 CREATE TABLE public."UserUpload"
 (
-    user_upload_id integer NOT NULL,
+    user_upload_id SERIAL,
     url character varying(200) NOT NULL,
     "Upload_For_User_FK" integer NOT NULL,
     "Upload_IsOf_UploadType_FK" integer,
@@ -45,14 +45,14 @@ CREATE TABLE public."UserUpload"
 
 CREATE TABLE public."Role"
 (
-    role_id integer NOT NULL,
+    role_id SERIAL,
     name character varying(20) NOT NULL,
     PRIMARY KEY (role_id)
 );
 
 CREATE TABLE public."UploadType"
 (
-    upload_type_id integer,
+    upload_type_id SERIAL,
     name character varying(20),
     PRIMARY KEY (upload_type_id)
 );
