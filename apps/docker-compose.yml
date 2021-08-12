@@ -44,7 +44,6 @@ services:
     environment:
       NEXT_PUBLIC_GRAPHQL_API_URL: http://127.0.0.1:8081/v1/graphql
     volumes:
-      - ./web/pages:/app/pages
-      - ./web/lib:/app/lib
+      - ./web:/app
 volumes:
   db_data:
