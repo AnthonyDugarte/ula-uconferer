@@ -16,8 +16,8 @@ jobs:
 
       - name: Apply metadata
         env:
-          HASURA_SECRET: secrets.HASURA_SECRET
-          HASURA_ENDPOINT: secrets.HASURA_ENDPOINT
+          HASURA_SECRET: ${{ secrets.HASURA_SECRET }}
+          HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
         run: hasura metadata apply --admin-secret ${HASURA_SECRET} --endpoint ${HASURA_ENDPOINT}
         working-directory: ./apps/api
 
