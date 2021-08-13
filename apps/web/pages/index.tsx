@@ -42,7 +42,11 @@ function Home() {
       </main>
 
       <footer className="border-t border-gray-200 flex items-center justify-center h-14">
-        <span>Uconferer</span>
+        <Link href="mailto:contact@uconferer.com">
+          <a rel="noreferrer noopener" target="_blank">
+            Contact Us
+          </a>
+        </Link>
       </footer>
     </div>
   );
