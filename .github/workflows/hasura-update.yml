@@ -28,3 +28,9 @@ jobs:
           HASURA_DATABASE: ${{ secrets.HASURA_DATABASE }}
         run: hasura migrate apply --admin-secret ${HASURA_SECRET} --endpoint ${HASURA_ENDPOINT} --database-name ${HASURA_DATABASE}
         working-directory: ./apps/api
+
+      - name: Reload metadata
+        env:
+          HASURA_SECRET: ${{ secrets.HASURA_SECRET }}
+          HASURA_ENDPOINT: ${{ secrets.HASURA_ENDPOINT }}
+        run: hasura metadata reload --admin-secret ${HASURA_SECRET} --endpoint ${HASURA_ENDPOINT}
