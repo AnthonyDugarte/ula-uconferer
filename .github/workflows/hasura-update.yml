@@ -19,7 +19,7 @@ jobs:
           HASURA_SECRET: secrets.HASURA_SECRET
           HASURA_ENDPOINT: secrets.HASURA_ENDPOINT
         run: hasura metadata apply --admin-secret ${HASURA_SECRET} --endpoint ${HASURA_ENDPOINT}
-        working-directory: apps/api
+        working-directory: ./apps/api
 
       - name: Apply migrations
         env:
@@ -27,4 +27,4 @@ jobs:
           HASURA_ENDPOINT: secrets.HASURA_ENDPOINT
           HASURA_DATABASE: secrets.HASURA_DATABASE
         run: hasura migrate apply --admin-secret ${HASURA_SECRET} --endpoint ${HASURA_ENDPOINT} --database-name ${HASURA_DATABASE}
-        working-directory: apps/api
+        working-directory: ./apps/api
