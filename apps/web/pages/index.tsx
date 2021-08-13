@@ -1,5 +1,6 @@
 import { withApollo } from "../lib/withApollo";
 import { useUser } from "@auth0/nextjs-auth0";
+import Link from "next/link";
 
 function Home() {
   const { user } = useUser();
@@ -17,21 +18,19 @@ function Home() {
 
         <div className="ml-auto">
           {!user && (
-            <a
-              href="/api/auth/login"
-              className="text-base text-gray-500 leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2"
-            >
-              Login
-            </a>
+            <Link href="/api/auth/login">
+              <a className="text-base text-gray-500 leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
+                Login
+              </a>
+            </Link>
           )}
 
           {!!user && (
-            <a
-              href="/api/auth/logout"
-              className="text-base text-gray-500 leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2"
-            >
-              Logout
-            </a>
+            <Link href="/api/auth/logout">
+              <a className="text-base text-gray-500 leading-6 font-medium hover:text-gray-600 transition-colors duration-200 py-2">
+                Logout
+              </a>
+            </Link>
           )}
         </div>
       </header>
