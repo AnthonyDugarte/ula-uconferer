@@ -72,4 +72,4 @@ function Presenters() {
 }
 
 
-export default withApollo()(Presenters)
+export default withApollo()(Presenters);
