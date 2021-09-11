@@ -69,10 +69,10 @@ async function getHeaders(ctx: EnrichedNextPageContext) {
   if (ctx.res) {
     const s = await auth0.getSession(ctx.req, ctx.res);
 
-    if (!s?.accessToken) return null;
+    if (!s?.idToken) return null;
 
     return {
-      authorization: `Bearer ${s ? s.accessToken : ""}`,
+      authorization: `Bearer ${s ? s.id?.idToken : ""}`,
     };
   }
 }

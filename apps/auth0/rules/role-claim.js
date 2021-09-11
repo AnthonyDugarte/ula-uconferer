@@ -28,16 +28,19 @@ function userRoleClaim(user, context, callback) {
    * Default value for hasura's JWT namespace, to customize it you can refer to
    *    https://hasura.io/docs/latest/graphql/core/auth/authentication/jwt.html
    */
-  const namespace = "https://hasura.io/jwt/claims";
+  const namespace = 'https://hasura.io/jwt/claims';
 
   /**
    * TODO: Get user's allowed-roles from database instead of using auth-user-id
    */
-  context.accessToken[namespace] = {
-    "x-hasura-default-role": "user",
-    "x-hasura-allowed-roles": ["user"],
-    "x-hasura-auth-user-id": user.user_id,
+  const claim = {
+    'x-hasura-default-role': 'user',
+    'x-hasura-allowed-roles': ['user'],
+    'x-hasura-auth-user-id': user.user_id,
   };
+
+  if (context.accessToken) context.accessToken[namespace] = claim;
+  if (context.idToken) context.idToken[namespace] = claim;
 
   callback(null, user, context);
 }
