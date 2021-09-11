@@ -8,7 +8,7 @@ export default async function session(
   try {
     const session = await auth0.getSession(req, res);
 
-    res.status(200).json({ accessToken: session?.accessToken });
+    res.status(200).json({ accessToken: session?.idToken });
   } catch (error) {
     console.error(error);
     res.status(error.status || 500).json({
