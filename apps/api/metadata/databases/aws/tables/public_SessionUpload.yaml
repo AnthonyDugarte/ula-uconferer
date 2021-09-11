@@ -8,3 +8,9 @@ object_relationships:
 - name: UploadType
   using:
     foreign_key_constraint_on: Upload_IsOf_UploadType_FK
+select_permissions:
+- permission:
+    columns:
+    - url
+    filter: {}
+  role: user

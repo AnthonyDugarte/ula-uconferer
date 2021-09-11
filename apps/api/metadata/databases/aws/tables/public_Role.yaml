@@ -9,3 +9,9 @@ array_relationships:
       table:
         name: User
         schema: public
+select_permissions:
+- permission:
+    columns:
+    - name
+    filter: {}
+  role: user
