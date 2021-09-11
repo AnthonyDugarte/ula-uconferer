@@ -20,3 +20,14 @@ array_relationships:
       table:
         name: UserUpload
         schema: public
+select_permissions:
+- permission:
+    columns:
+    - email
+    - firstname
+    - lastname
+    filter:
+      Role:
+        name:
+          _eq: Presenter
+  role: user

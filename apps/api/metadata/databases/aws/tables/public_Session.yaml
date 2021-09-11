@@ -13,3 +13,13 @@ array_relationships:
       table:
         name: SessionUpload
         schema: public
+select_permissions:
+- permission:
+    columns:
+    - date
+    - name
+    - session_id
+    - summarization
+    - time
+    filter: {}
+  role: user
