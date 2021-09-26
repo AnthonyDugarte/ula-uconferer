@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { withApollo } from "../lib/withApollo";
 import { gql, useQuery } from "@apollo/client";
 import { Layout } from "../components/layout";
@@ -47,25 +47,28 @@ const GET_PRESENTERS = gql`
  */
 function PresenterCard({ presenter }: { presenter: Presenter }) {
   return (
-    <div className="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+    <div className="flex md:flex-col md:max-w-xs overflow-hidden bg-white rounded-lg shadow-md md:shadow-lg dark:bg-gray-800">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        className="object-cover w-full h-56"
+        className="object-cover md:w-full h-28 md:h-56"
         src={presenter.UserUploads?.[0]?.url}
         alt="avatar"
       />
 
-      <div className="py-5 text-center">
+      <div className="md:text-center py-5 px-4 md:px0">
         <a
           href="#"
-          className="block text-2xl font-bold text-gray-800 dark:text-white"
+          className="block text-lg md:text-2xl font-bold text-gray-800 dark:text-white"
         >
           {[presenter.firstname, presenter.lastname].filter(Boolean).join(" ")}
         </a>
 
-        <span className="text-sm text-gray-700 dark:text-gray-200">
+        <a
+          href={`mailto:${presenter.email}`}
+          className="text-sm text-gray-700 dark:text-gray-200"
+        >
           {presenter.email}
-        </span>
+        </a>
       </div>
     </div>
   );
@@ -81,14 +84,29 @@ function PresenterCard({ presenter }: { presenter: Presenter }) {
 const PresentersPage: FC = () => {
   const { loading, error, data } = useQuery<PresenterResult>(GET_PRESENTERS);
 
+  const colsClassName = useMemo(() => {
+    switch (data?.User.length) {
+      case 1:
+        return "grid-cols-1";
+      case 2:
+        return "grid-cols-1 md:grid-cols-2";
+      case 3:
+        return "grid-cols-1 md:grid-cols-2 xl:grid-cols-3";
+      default:
+        return "grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4";
+    }
+  }, [data?.User.length]);
+
   if (loading) return <>Loading...</>;
   if (error) return <>Error! ${error.message}</>;
 
   return (
     <Layout>
       <div className="flex flex-1 flex-col">
-        <main className="flex flex-1 justify-center items-center py-20">
-          <div className="grid grid-rows-1 grid-flow-col gap-64 gap-y-96">
+        <main className="flex md:flex-1 justify-center md:items-center py-8 md:py-20">
+          <div
+            className={`flex-1 md:flex-none px-4 md:px-0 grid ${colsClassName} gap-y-12 md:gap-24 lg:gap-48`}
+          >
             {data?.User.map((presenter) => (
               <PresenterCard key={presenter.user_id} presenter={presenter} />
             ))}
