@@ -27,7 +27,7 @@ export const Layout: FC = ({ children }) => {
             </a>
           </Link>
 
-          <div className="ml-auto flex items-center gap-4">
+          <div className="hidden md:flex ml-auto items-center gap-4">
             {!!user && (
               <div>
                 <span className="text-base text-gray-500 leading-6 transition-colors duration-200 py-2">
