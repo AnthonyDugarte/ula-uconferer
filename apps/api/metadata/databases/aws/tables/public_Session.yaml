@@ -16,9 +16,10 @@ array_relationships:
 select_permissions:
 - permission:
     columns:
-    - date
+    - end_at
     - name
     - session_id
+    - start_at
     - summarization
     filter: {}
   role: user

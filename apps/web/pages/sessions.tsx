@@ -7,7 +7,8 @@ interface Session {
   session_id: string;
   summarization: string;
   name: string;
-  date: string;
+  start_at: string;
+  end_at: string;
   SessionUploads: {
     url: string;
   }[];
@@ -27,11 +28,12 @@ interface SessionResult {
 /**Get Sessions Query with the presenter */
 const GET_SESSIONS = gql`
   query getSessions {
-    Session {
+    Session(order_by: [{ start_at: asc }]) {
       session_id
       summarization
       name
-      date
+      start_at
+      end_at
       SessionUploads {
         url
       }
