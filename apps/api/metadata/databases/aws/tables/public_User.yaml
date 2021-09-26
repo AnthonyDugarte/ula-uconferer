@@ -26,6 +26,7 @@ select_permissions:
     - email
     - firstname
     - lastname
+    - user_id
     filter:
       Role:
         name:
