@@ -1,10 +1,7 @@
 import { withApollo } from "../lib/withApollo";
-import { useUser } from "@auth0/nextjs-auth0";
 import { Layout } from "../components/layout";
 
 function Home() {
-  const { user } = useUser();
-
   return (
     <Layout>
       <section className="flex-1 flex justify-center items-center">
@@ -16,4 +13,4 @@ function Home() {
   );
 }
 
-export default withApollo()(Home);
+export default withApollo({ auth: false })(Home);

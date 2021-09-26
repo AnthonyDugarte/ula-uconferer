@@ -1,9 +1,14 @@
 import { NextPage, NextPageContext } from "next";
 import { AppContext } from "next/app";
 import { ApolloProvider, NormalizedCacheObject } from "@apollo/client";
+import {
+  withPageAuthRequired,
+  WithPageAuthRequiredProps,
+} from "@auth0/nextjs-auth0";
 import createApolloClient from "./apolloClient";
 
 import auth0 from "./auth0";
+import { FC } from "react";
 
 interface ApolloNextPageProps {
   apolloClient?: ReturnType<typeof createApolloClient>;
@@ -104,13 +109,11 @@ const initApolloClient = (
  * to a next.js Page or AppTree.
  */
 export const withApollo =
-  ({ ssr = true } = {}) =>
-  (PageComponent: NextPage<EnrichedNextPageContext>) => {
-    const WithApollo = ({
-      apolloClient,
-      apolloState,
-      ...pageProps
-    }: EnrichedNextPageContext) => {
+  <T,>({ ssr = true, auth = true } = {}) =>
+  (PageComponent: NextPage<T>) => {
+    const WithApolloBase: FC<
+      T & EnrichedNextPageContext & WithPageAuthRequiredProps
+    > = ({ apolloClient, apolloState, ...pageProps }) => {
       let client: ReturnType<typeof createApolloClient>;
       if (apolloClient) {
         // Happens on: getDataFromTree & next.js ssr
@@ -126,6 +129,14 @@ export const withApollo =
         </ApolloProvider>
       );
     };
+    const WithApollo = auth
+      ? withPageAuthRequired(WithApolloBase, {
+          onRedirecting() {
+            // TODO: Improve loader
+            return <>Loading...</>;
+          },
+        })
+      : WithApolloBase;
 
     // Set the correct displayName in development
     if (process.env.NODE_ENV !== "production") {
