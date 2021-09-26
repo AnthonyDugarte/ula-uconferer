@@ -20,6 +20,5 @@ select_permissions:
     - name
     - session_id
     - summarization
-    - time
     filter: {}
   role: user

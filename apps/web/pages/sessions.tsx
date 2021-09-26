@@ -8,7 +8,6 @@ interface Session {
   summarization: string;
   name: string;
   date: string;
-  time: string;
   SessionUploads: {
     url: string;
   }[];
@@ -33,7 +32,6 @@ const GET_SESSIONS = gql`
       summarization
       name
       date
-      time
       SessionUploads {
         url
       }
