@@ -1,4 +1,3 @@
-import React from "react";
 import { NextPage, NextPageContext } from "next";
 import { AppContext } from "next/app";
 import { ApolloProvider, NormalizedCacheObject } from "@apollo/client";

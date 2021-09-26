@@ -1,12 +1,35 @@
-import React, { Fragment, useState } from "react";
 import { withApollo } from "../lib/withApollo";
-import { useUser } from "@auth0/nextjs-auth0";
 import { gql, useQuery } from "@apollo/client";
+import { FC } from "react";
+import { Layout } from "../components/layout";
+
+interface Session {
+  session_id: string;
+  summarization: string;
+  name: string;
+  date: string;
+  time: string;
+  SessionUploads: {
+    url: string;
+  }[];
+  User: {
+    firstname: string;
+    lastname: string;
+    UserUploads: {
+      url: string;
+    }[];
+  };
+}
+
+interface SessionResult {
+  Session: Session[];
+}
 
 /**Get Sessions Query with the presenter */
 const GET_SESSIONS = gql`
   query getSessions {
     Session {
+      session_id
       summarization
       name
       date
@@ -24,6 +47,7 @@ const GET_SESSIONS = gql`
     }
   }
 `;
+
 /**
  * Component for a Session in a Session List.
  *
@@ -31,14 +55,16 @@ const GET_SESSIONS = gql`
  * @param session
  * @returns The rendered component
  */
-function SessionEntry(session) {
+function SessionEntry({ session }: { session: Session }) {
   return (
     <li key={session.name} className="py-4 flex">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="h-10 w-10 rounded-full"
         src={session.User.UserUploads[0].url}
         alt=""
       />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         className="h-10 w-10 rounded-full"
         src={session.SessionUploads[0].url}
@@ -49,28 +75,27 @@ function SessionEntry(session) {
         <p className="text-sm font-medium text-gray-900">
           {session.User.firstname + " " + session.User.lastname}
         </p>
-        <p className="text-sm text-gray-500">
-          {session.summarization.join(" ")}
-        </p>
+        <p className="text-sm text-gray-500">{session.summarization}</p>
       </div>
     </li>
   );
 }
 
-function SessionsList() {
-  const { loading, error, data } = useQuery(GET_SESSIONS);
+const SessionsList: FC = () => {
+  const { loading, error, data } = useQuery<SessionResult>(GET_SESSIONS);
 
-  if (loading) {
-    console.log("Loading...");
-    return "Loading...";
-  }
-  if (error) return `Error! ${error.message}`;
+  if (loading) return <>Loading...</>;
+  if (error) return <>Error! ${error.message}</>;
 
   return (
-    <ul className="divide-y divide-gray-200">
-      {data.Session.map((session) => SessionEntry(session))}
-    </ul>
+    <Layout>
+      <ul className="divide-y divide-gray-200">
+        {data?.Session.map((session) => (
+          <SessionEntry key={session.session_id} session={session} />
+        ))}
+      </ul>
+    </Layout>
   );
-}
+};
 
 export default withApollo()(SessionsList);
