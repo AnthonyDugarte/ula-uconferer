@@ -134,7 +134,7 @@ export const withApollo =
       ? withPageAuthRequired(WithApolloBase, {
           onRedirecting() {
             // TODO: Improve loader
-            return <>Loading...</>;
+            return <span className="m-auto text-4xl font-bold">Loading...</span>;
           },
         })
       : WithApolloBase;
