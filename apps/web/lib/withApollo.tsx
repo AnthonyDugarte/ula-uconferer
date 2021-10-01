@@ -125,6 +125,7 @@ export const withApollo =
 
       return (
         <ApolloProvider client={client}>
+          {/* @ts-ignore */}
           <PageComponent {...pageProps} />
         </ApolloProvider>
       );
@@ -146,6 +147,7 @@ export const withApollo =
     }
 
     if (ssr || PageComponent.getInitialProps) {
+      // @ts-ignore
       WithApollo.getInitialProps = async (ctx: EnrichedNextPageContext) => {
         const { AppTree } = ctx;
 
