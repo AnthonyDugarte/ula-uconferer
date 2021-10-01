@@ -59,9 +59,9 @@ const GET_SESSIONS = gql`
  * @param session
  * @returns The rendered component
  */
-function SessionEntry({ session }: { session: Session }) {
+export function SessionEntry({ session }: { session: Session }) {
   return (
-    <li key={session.session_id}>
+    <div key={session.session_id}>
       <Link href={`/sessions/${session.session_id}`}>
         <a className="py-4 px-2 flex group">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -116,7 +116,7 @@ function SessionEntry({ session }: { session: Session }) {
           </div>
         </a>
       </Link>
-    </li>
+    </div>
   );
 }
 
@@ -128,11 +128,11 @@ const SessionsList: FC = () => {
 
   return (
     <Layout>
-      <ul className="divide-y divide-gray-200">
+      <div className="divide-y divide-gray-200">
         {data?.Session.map((session) => (
           <SessionEntry key={session.session_id} session={session} />
         ))}
-      </ul>
+      </div>
     </Layout>
   );
 };
