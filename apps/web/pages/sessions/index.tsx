@@ -1,9 +1,9 @@
-import { withApollo } from "../lib/withApollo";
+import { withApollo } from "../../lib/withApollo";
 import { gql, useQuery } from "@apollo/client";
 import { FC } from "react";
 import Link from "next/link";
 import { format } from "date-fns";
-import { Layout } from "../components/layout";
+import { Layout } from "../../components/layout";
 
 interface Session {
   session_id: string;
